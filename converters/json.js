@@ -55,8 +55,7 @@ Converter.prototype.highlights = function() {
 
   const headingsArray = headings.get();
 
-  // console.log(headingsArray);
-  inspect(headingsArray);
+  // inspect(headingsArray);
 
   headings.each((index, el) => {
     const heading = cheerio(el);
@@ -104,7 +103,9 @@ Converter.prototype.highlightContent = function(location, color, el) {
       color: color,
       content: cheerio(nextEl)
         .text()
-        .trim(),
+        .trim()
+        // remove unexpected break line and followed spaces
+        .replace(/\n\s*/, ''),
       location: location,
     };
 
@@ -122,7 +123,5 @@ Converter.prototype.highlightContent = function(location, color, el) {
 module.exports = Converter;
 
 function inspect(l) {
-  return console.log(
-    require('util').inspect(l, { colors: true, depth: 3 }),
-  );
+  return console.log(require('util').inspect(l, { colors: true, depth: 3 }));
 }
