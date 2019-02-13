@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 // const transformEmailToJson = require('kindle-email-to-json');
 
 const JsonConverter = require('./converters/json');
+const genMarkdown = require('./generator/markdown');
 
 const notesDir = path.resolve('./notes');
 const jsonDir = path.resolve('./json');
@@ -32,7 +33,7 @@ async function run() {
 
   await Promise.all([
     ...emails.map(genJson),
-    // ...emails.map(genMarkdown),
+    ...emails.map(e => genMarkdown(e, markdownDir)),
   ]);
 }
 
@@ -52,8 +53,4 @@ async function genJson({ fileName, json }) {
   return fs.outputJson(path.join(jsonDir, `${fileName}.json`), json, {
     spaces: 2,
   });
-}
-
-async function genMarkdown({ fileName, json }) {
-  return fs.outputFile(path.join(markdownDir, `${fileName}.md`));
 }

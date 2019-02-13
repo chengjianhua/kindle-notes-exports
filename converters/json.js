@@ -103,9 +103,9 @@ Converter.prototype.highlightContent = function(location, color, el) {
       color: color,
       content: cheerio(nextEl)
         .text()
-        .trim()
+        .trim(),
         // remove unexpected break line and followed spaces
-        .replace(/\n\s*/, ''),
+        // .replace(/\n\s+/g, ' '),
       location: location,
     };
 

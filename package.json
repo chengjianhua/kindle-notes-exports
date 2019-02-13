@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "transform": "rm -rf ./json && node ./transform.js"
+    "transform": "rm -rf ./json ./markdown && node ./transform.js"
   },
   "dependencies": {
     "fs-extra": "^7.0.1",
